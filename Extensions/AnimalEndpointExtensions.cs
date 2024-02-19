@@ -3,20 +3,23 @@ namespace LiveDemo.Extensions;
 
 public static class AnimalEndpointExtensions
 {
-    public static WebApplication MapAnimalEndpoints(this WebApplication app)
+    public static IEndpointRouteBuilder MapAnimalEndpoints(this IEndpointRouteBuilder app)
     {
+
+        var endpointGrp = app.MapGroup("api/animal");
+
         //CREATE
-        app.MapPost("/", AddAnimal);
+        endpointGrp.MapPost("/", AddAnimal);
 
         //READ
-        app.MapGet("/", GetAllAnimals);
+        endpointGrp.MapGet("/", GetAllAnimals);
 
         //UPDATE
-        app.MapPut("/{id}", ReplaceAnimal);
-        app.MapPatch("/{id}", UpdateAnimal);
+        endpointGrp.MapPut("/{id}", ReplaceAnimal);
+        endpointGrp.MapPatch("/{id}", UpdateAnimal);
 
         //DELETE
-        app.MapDelete("/{id}", DeleteAnimal);
+        endpointGrp.MapDelete("/{id}", DeleteAnimal);
 
         return app;
     }
