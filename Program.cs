@@ -1,3 +1,5 @@
+using LiveDemo.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<AnimalService>();
@@ -17,7 +19,8 @@ app.MapGet("/", (AnimalService service) => service.Animals);
 //UPDATE
 app.MapPut("/{id}", (AnimalService service, int id, Animal animal) =>
 {
-    service.Animals[id] = animal;
+    //service.Animals[id] = animal;
+    service.Animals.Replace(animal);
 });
 
 app.MapPatch("/{id}", (AnimalService service, string type, int id) =>
@@ -28,7 +31,8 @@ app.MapPatch("/{id}", (AnimalService service, string type, int id) =>
 //DELETE
 app.MapDelete("/{id}", (AnimalService service, int id) =>
 {
-    service.Animals.RemoveAt(id);
+    //service.Animals.RemoveAt(id);
+    service.RemoveAnimal();
 });
 
 
